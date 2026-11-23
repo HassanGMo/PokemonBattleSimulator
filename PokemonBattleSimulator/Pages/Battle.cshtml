@@ -1,0 +1,36 @@
+@page
+@model PokemonBattleSimulator.Pages.BattleModel
+
+@{
+    ViewData["Title"] = "Pokemon Battle";
+}
+
+@* Displays the battle screen title *@
+<div class="text-center">
+    <h1>POKEMON BATTLE</h1>
+    <p>Get ready to battle!</p>
+</div>
+
+@* Displays the opponents Pokemon *@
+<div class="text-center mt-4">
+    <h2>Opponent: @Model.OpponentPokemon.Name</h2>
+
+    <img src="~/images/@Model.OpponentPokemon.ImageFile"
+         alt="@Model.OpponentPokemon.Name"
+         class="img-fluid"
+         style="height: 200px; object-fit: contain;" />
+
+    <p>Health: @Model.OpponentPokemon.MaxHP</p>
+</div>
+
+@* Displays the players selected Pokemon *@
+<div class="text-center mt-5">
+    <h2>Your Pokemon: @Model.PlayerPokemon.Name</h2>
+
+    <img src="~/images/@Model.PlayerPokemon.ImageFile"
+         alt="@Model.PlayerPokemon.Name"
+         class="img-fluid"
+         style="height: 200px; object-fit: contain;" />
+
+    <p>Health: @Model.PlayerPokemon.MaxHP</p>
+</div>

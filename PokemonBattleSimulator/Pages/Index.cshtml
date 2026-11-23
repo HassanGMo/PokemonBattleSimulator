@@ -1,0 +1,61 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Choose Your Pokémon";
+}
+
+<div class="text-center">
+    <h1>Choose Your Pokemon</h1>
+    <p>Select your Pokémon to begin the battle!</p>
+</div>
+
+<form method="post" class="row text-center mt-4">
+
+    @* Display all six Pokemon as individual square card in the pokemon selection screen *@
+    @foreach (var pokemon in Model.PokemonList)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card p-3">
+
+                @* Displays the Pokemon images *@
+                <img src="~/images/@pokemon.ImageFile"
+                     alt="@pokemon.Name"
+                     class="img-fluid"
+                     style="height: 150px; object-fit: contain;" />
+
+                @* Display the Pokemons stats *@
+                <h4>@pokemon.Name</h4>
+                <p>Type: @pokemon.Type</p>
+                <p>Attack: @pokemon.Attack</p>
+                <p>Health: @pokemon.MaxHP</p>
+
+                @* Allows the player to select a pokemon *@
+                <label>
+                    <input type="radio"
+                           name="selectedPokemon"
+                           value="@pokemon.PokemonID"
+                           required />
+                    Select @pokemon.Name
+                </label>
+
+            </div>
+        </div>
+    }
+
+    @* A button to submit the selected Pokemon *@
+    <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary">
+            Start Battle
+        </button>
+    </div>
+
+</form>
+
+@* Displays the Pokemon selected by the player *@
+@if (Model.SelectedPokemon.PokemonID != 0)
+{
+    <div class="text-center mt-3">
+        <h3>You selected @Model.SelectedPokemon.Name!</h3>
+    </div>
+}
