@@ -20,7 +20,7 @@
          class="img-fluid"
          style="height: 200px; object-fit: contain;" />
 
-    <p>Health: @Model.OpponentPokemon.MaxHP</p>
+    <p>Health: @Model.OpponentHealth</p>
 </div>
 
 @* Displays the players selected Pokemon *@
@@ -32,5 +32,14 @@
          class="img-fluid"
          style="height: 200px; object-fit: contain;" />
 
-    <p>Health: @Model.PlayerPokemon.MaxHP</p>
+    <p>Health: @Model.PlayerHealth</p>
+</div>
+
+@* Allows the player to attack the opponent *@
+<div class="text-center mt-4">
+    <form method="post" asp-page-handler="Attack">
+        <button type="submit" class="btn btn-danger">
+            Attack
+        </button>
+    </form>
 </div>

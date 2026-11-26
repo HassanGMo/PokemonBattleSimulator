@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PokemonBattleSimulator.Models;
 using System;
@@ -65,6 +66,44 @@ namespace PokemonBattleSimulator.Pages
             // Saves both Pokemons starting health
             HttpContext.Session.SetInt32("PlayerHealth", PlayerHealth);
             HttpContext.Session.SetInt32("OpponentHealth", OpponentHealth);
+        }
+
+        // THis will handle the players attack
+        public IActionResult OnPostAttack()
+        {
+            // Looks for the saved Pokemon IDs
+            int playerID = HttpContext.Session.GetInt32("PlayerPokemonID") ?? 0;
+            int opponentID = HttpContext.Session.GetInt32("OpponentPokemonID") ?? 0;
+
+            // Looks for both Pokemons saved health
+            PlayerHealth = HttpContext.Session.GetInt32("PlayerHealth") ?? 0;
+            OpponentHealth = HttpContext.Session.GetInt32("OpponentHealth") ?? 0;
+
+            // Finds both Pokemon again
+            foreach (var pokemon in PokemonData.PokemonList)
+            {
+                if (pokemon.PokemonID == playerID)
+                {
+                    PlayerPokemon = pokemon;
+                }
+
+                if (pokemon.PokemonID == opponentID)
+                {
+                    OpponentPokemon = pokemon;
+                }
+            }
+
+            // Calculates damage from the players attack
+            int damage = CalculateDamage(PlayerPokemon);
+
+            // This will allow the opponents health to be reduced
+            OpponentHealth = OpponentHealth - damage;
+
+            // Saves the updated health
+            HttpContext.Session.SetInt32("PlayerHealth", PlayerHealth);
+            HttpContext.Session.SetInt32("OpponentHealth", OpponentHealth);
+
+            return Page();
         }
     }
 }

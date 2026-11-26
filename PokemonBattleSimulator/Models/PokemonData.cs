@@ -56,7 +56,7 @@ namespace PokemonBattleSimulator.Models
                 PokemonID = 5,
                 Name = "Eevee",
                 Type = "Normal",
-                Attack = 14,
+                Attack = 16,
                 MaxHP = 95,
                 CurrentHP = 95,
                 ImageFile = "eevee.png"
